@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RAW_Burst_Mode_Extractor.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DNGLabExePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SourceImageDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DestImageDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OptionsString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">--image-index all --embed-raw false</Value>
+    </Setting>
+    <Setting Name="ImagePrefixes" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CSI_</Value>
+    </Setting>
+    <Setting Name="ImageExtensions" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.CR3</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
