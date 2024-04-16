@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-//using FreeImageAPI;
 using ImageMagick;
 
 namespace RAW_Burst_Mode_Extractor
@@ -64,11 +63,7 @@ namespace RAW_Burst_Mode_Extractor
 				return;
 			}
 
-			if (MessageBox.Show("Extraction will now begin. Expect about 2 seconds per image", "Beginning Extraction", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel)
-			{
-				return;
-			}
-
+			printMessage("Beginning Extraction. Expect approximately 2-3 seconds per image");
 
 			//exe exists and images exist.  We're good to try extracting
 			//run the DNGLab exe on all of these images
@@ -87,10 +82,10 @@ namespace RAW_Burst_Mode_Extractor
 					outputPathWithPrefix = outputPathWithPrefix.Replace(" ", "` ");
 
 					string args = $"\"\"{exePath}\"\" convert {tbOptionsString.Text} {sourceImagePath} {outputPathWithPrefix}";
-					Process.Start("powershell.exe", args);
-				}
 
-				MessageBox.Show("Extraction Complete!", "Extraction Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					printMessage($"Extracting images - {imageFile}");
+					ExecuteCommand(args);
+				}
 			}
 			catch (Exception ex)
 			{
@@ -125,7 +120,7 @@ namespace RAW_Burst_Mode_Extractor
 
 		private void btnBrowseDNGLabExe_Click(object sender, EventArgs e)
 		{
-			openFileDialog1.InitialDirectory = Directory.Exists(tbDNGLabExePath.Text) ? tbDNGLabExePath.Text : Directory.GetCurrentDirectory();
+			openFileDialog1.InitialDirectory = Directory.Exists(Path.GetDirectoryName(tbDNGLabExePath.Text)) ? tbDNGLabExePath.Text : Directory.GetCurrentDirectory();
 
 			if (openFileDialog1.ShowDialog() == DialogResult.OK)
 			{
@@ -194,7 +189,6 @@ namespace RAW_Burst_Mode_Extractor
 		{
 			if (!Directory.Exists(path))
 			{
-				showErrorMessage($"Directory does not exist:\r\n\r\n{path}");
 				return;
 			}
 
@@ -335,11 +329,6 @@ namespace RAW_Burst_Mode_Extractor
 			}
 		}
 
-		private void pictureBox_Resize(object sender, EventArgs e)
-		{
-			pictureBox.Height = pictureBox.Width * 2 / 3;
-		}
-
 		private void showWarningMessage(string message, Exception ex)
 		{
 			showWarningMessage($"{message}\r\n\r\n{ex.Message}");
@@ -381,6 +370,42 @@ namespace RAW_Burst_Mode_Extractor
 				FileName = "https://github.com/dnglab/dnglab/blob/main/README.md",
 				UseShellExecute = true
 			});
+		}
+
+		private void ExecuteCommand(string command)
+		{
+			var powershellThread = new Thread(() => RunPowershellThread(command));
+			powershellThread.Start();
+		}
+
+		private void RunPowershellThread(string command)
+		{
+			var processStartInfo = new ProcessStartInfo();
+			processStartInfo.FileName = "powershell.exe";
+			processStartInfo.Arguments = command;
+			processStartInfo.UseShellExecute = false;
+			processStartInfo.RedirectStandardOutput = true;
+			processStartInfo.CreateNoWindow = false;
+
+			using var process = new Process();
+			process.StartInfo = processStartInfo;
+			process.Start();
+
+			string output = process.StandardOutput.ReadToEnd().Replace("\n", "\r\n").Trim();
+			BeginInvoke((Action)delegate
+			{
+				printMessage(output);
+			});
+		}
+
+		private void printMessage(string message)
+		{
+			tbMessages.AppendText(message + "\r\n");
+		}
+
+		private void btnClearMessages_Click(object sender, EventArgs e)
+		{
+			tbMessages.Clear();
 		}
 	}
 }
