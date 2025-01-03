@@ -1,7 +1,10 @@
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using System.Threading;
 using ImageMagick;
+using Microsoft.VisualBasic.FileIO;
 
 namespace RAW_Burst_Mode_Extractor
 {
@@ -65,6 +68,8 @@ namespace RAW_Burst_Mode_Extractor
 
 			printMessage("Beginning Extraction. Expect approximately 2-3 seconds per image");
 
+			var maxConcurrentThreads = (int)nudMaxPowerShellWindows.Value;
+
 			//exe exists and images exist.  We're good to try extracting
 			//run the DNGLab exe on all of these images
 			try
@@ -73,23 +78,94 @@ namespace RAW_Burst_Mode_Extractor
 				exePath = exePath.Replace(" ", "` ");
 
 				var imagePaths = new List<string>();
+				ConcurrentBag<Thread> processingThreads = new ConcurrentBag<Thread>();
+
 				foreach (string imageFile in clbCandidateImages.CheckedItems)
 				{
 					string sourceImagePath = tbImageSourceDir.Text + "\\" + imageFile;
 					sourceImagePath = sourceImagePath.Replace(" ", "` ");
 
-					string outputPathWithPrefix = tbImageDestDir.Text + "\\" + Path.GetFileNameWithoutExtension(imageFile);
+					var imageFileNoExtension = Path.GetFileNameWithoutExtension(imageFile);
+					string outputPathWithPrefix;
+
+					if (cbExractToSourceDir.Checked)
+					{
+						outputPathWithPrefix = tbImageSourceDir.Text + "\\" + imageFileNoExtension;
+					}
+					else
+					{
+						outputPathWithPrefix = tbImageDestDir.Text + "\\" + imageFileNoExtension;
+					}
+					
+
+					if (cbCreateOutputSubDirs.Checked)
+					{
+						//If we want to create sub dirs to put the photos in,
+						//then the name we THOUGHT we would give to the images (excluding their suffixes which are added by DNGLab)
+						//will actually be the new sub dir's name
+						//So create that dir if necessary, then append the source file's name again to get the NEW output file's ACTUAL name
+						var newOutputSubDir = outputPathWithPrefix;
+						if (!Directory.Exists(newOutputSubDir))
+						{
+							Directory.CreateDirectory(newOutputSubDir);
+						}
+
+						outputPathWithPrefix += "\\" + imageFileNoExtension;
+					}
+
 					outputPathWithPrefix = outputPathWithPrefix.Replace(" ", "` ");
 
 					string args = $"\"\"{exePath}\"\" convert {tbOptionsString.Text} {sourceImagePath} {outputPathWithPrefix}";
 
-					printMessage($"Extracting images - {imageFile}");
-					ExecuteCommand(args);
+					Thread thread = new Thread(semaphore =>
+					{
+						BeginInvoke((Action)delegate
+						{
+							printMessage($"Beginning image extraction: {imageFile}");
+						});
+
+						var output = RunPowershellCommand(args).Replace("\r\n", "\r\n\t");
+						BeginInvoke((Action)delegate
+						{
+							printMessage($"Processing of \"{imageFile}\" Complete:\r\n\t{output}");
+						});
+
+						try
+						{
+							((SemaphoreSlim)semaphore).Release();
+						}
+						catch (Exception ex)
+						{
+							//probably complaining that the semaphore was already disposed
+							//This can be ignored because if it was disposed, then the final threads have been started, so the semaphore is done being used
+						}
+						if (cbRecycleProcessedFiles.Checked)
+						{
+							FileSystem.DeleteFile(tbImageSourceDir.Text + "\\" + imageFile, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+						}
+					});
+
+					processingThreads.Add(thread);
 				}
+
+				var spawnThread = new Thread(() => { SpawnThreads(processingThreads, maxConcurrentThreads); });
+				spawnThread.Start();
 			}
 			catch (Exception ex)
 			{
 				showErrorMessage("Error attempting to use DNGLab.exe to process image(s)", ex);
+			}
+		}
+
+		public void SpawnThreads(ConcurrentBag<Thread> threads, int maxConcurrentThreads)
+		{
+			using (SemaphoreSlim semaphore = new SemaphoreSlim(maxConcurrentThreads))
+			{
+				foreach (var thread in threads)
+				{
+					semaphore.Wait();
+					thread.Start(semaphore);
+				}
 			}
 		}
 
@@ -372,17 +448,11 @@ namespace RAW_Burst_Mode_Extractor
 			});
 		}
 
-		private void ExecuteCommand(string command)
-		{
-			var powershellThread = new Thread(() => RunPowershellThread(command));
-			powershellThread.Start();
-		}
-
-		private void RunPowershellThread(string command)
+		private string RunPowershellCommand(string args)
 		{
 			var processStartInfo = new ProcessStartInfo();
 			processStartInfo.FileName = "powershell.exe";
-			processStartInfo.Arguments = command;
+			processStartInfo.Arguments = args;
 			processStartInfo.UseShellExecute = false;
 			processStartInfo.RedirectStandardOutput = true;
 			processStartInfo.CreateNoWindow = false;
@@ -391,11 +461,7 @@ namespace RAW_Burst_Mode_Extractor
 			process.StartInfo = processStartInfo;
 			process.Start();
 
-			string output = process.StandardOutput.ReadToEnd().Replace("\n", "\r\n").Trim();
-			BeginInvoke((Action)delegate
-			{
-				printMessage(output);
-			});
+			return process.StandardOutput.ReadToEnd().Replace("\n", "\r\n").Trim();
 		}
 
 		private void printMessage(string message)
@@ -406,6 +472,17 @@ namespace RAW_Burst_Mode_Extractor
 		private void btnClearMessages_Click(object sender, EventArgs e)
 		{
 			tbMessages.Clear();
+		}
+
+		private void cbLimitPowershellWindows_CheckedChanged(object sender, EventArgs e)
+		{
+			nudMaxPowerShellWindows.Enabled = cbLimitPowershellWindows.Checked;
+		}
+
+		private void cbExractToSourceDir_CheckedChanged(object sender, EventArgs e)
+		{
+			lblDestDir.Enabled = !cbExractToSourceDir.Checked;
+			tbImageDestDir.Enabled = !cbExractToSourceDir.Checked;
 		}
 	}
 }

@@ -46,6 +46,11 @@
 			btnDeselectAllCandidates = new Button();
 			splitContainer1 = new SplitContainer();
 			grpOptions = new GroupBox();
+			cbRecycleProcessedFiles = new CheckBox();
+			cbExractToSourceDir = new CheckBox();
+			cbCreateOutputSubDirs = new CheckBox();
+			nudMaxPowerShellWindows = new NumericUpDown();
+			cbLimitPowershellWindows = new CheckBox();
 			btnOptionsHelp = new Button();
 			btnOpenDestDir = new Button();
 			btnOpenSourceDir = new Button();
@@ -77,6 +82,7 @@
 			splitContainer1.Panel2.SuspendLayout();
 			splitContainer1.SuspendLayout();
 			grpOptions.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)nudMaxPowerShellWindows).BeginInit();
 			grpImagePreview.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
 			menuStrip1.SuspendLayout();
@@ -90,16 +96,16 @@
 			// tbDNGLabExePath
 			// 
 			tbDNGLabExePath.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-			tbDNGLabExePath.Location = new Point(223, 12);
+			tbDNGLabExePath.Location = new Point(236, 12);
 			tbDNGLabExePath.Name = "tbDNGLabExePath";
-			tbDNGLabExePath.Size = new Size(398, 23);
+			tbDNGLabExePath.Size = new Size(388, 23);
 			tbDNGLabExePath.TabIndex = 0;
 			tbDNGLabExePath.TextChanged += tbDNGLabExePath_TextChanged;
 			// 
 			// lblDNGLabExePath
 			// 
 			lblDNGLabExePath.AutoSize = true;
-			lblDNGLabExePath.Location = new Point(76, 15);
+			lblDNGLabExePath.Location = new Point(89, 15);
 			lblDNGLabExePath.Name = "lblDNGLabExePath";
 			lblDNGLabExePath.Size = new Size(141, 15);
 			lblDNGLabExePath.TabIndex = 1;
@@ -108,16 +114,16 @@
 			// tbImageSourceDir
 			// 
 			tbImageSourceDir.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-			tbImageSourceDir.Location = new Point(223, 41);
+			tbImageSourceDir.Location = new Point(236, 41);
 			tbImageSourceDir.Name = "tbImageSourceDir";
-			tbImageSourceDir.Size = new Size(398, 23);
+			tbImageSourceDir.Size = new Size(388, 23);
 			tbImageSourceDir.TabIndex = 2;
 			tbImageSourceDir.TextChanged += tbImageSourceDir_TextChanged;
 			// 
 			// lblSourceDir
 			// 
 			lblSourceDir.AutoSize = true;
-			lblSourceDir.Location = new Point(123, 44);
+			lblSourceDir.Location = new Point(136, 44);
 			lblSourceDir.Name = "lblSourceDir";
 			lblSourceDir.Size = new Size(94, 15);
 			lblSourceDir.TabIndex = 3;
@@ -126,46 +132,46 @@
 			// lblImageExtensions
 			// 
 			lblImageExtensions.AutoSize = true;
-			lblImageExtensions.Location = new Point(12, 130);
+			lblImageExtensions.Location = new Point(1, 208);
 			lblImageExtensions.Name = "lblImageExtensions";
-			lblImageExtensions.Size = new Size(205, 15);
+			lblImageExtensions.Size = new Size(229, 15);
 			lblImageExtensions.TabIndex = 5;
-			lblImageExtensions.Text = "Image Extensions (comma separated)";
+			lblImageExtensions.Text = "Image Extension Filter (comma separated)";
 			// 
 			// tbImageExtensions
 			// 
 			tbImageExtensions.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-			tbImageExtensions.Location = new Point(223, 127);
+			tbImageExtensions.Location = new Point(236, 205);
 			tbImageExtensions.Name = "tbImageExtensions";
-			tbImageExtensions.Size = new Size(398, 23);
+			tbImageExtensions.Size = new Size(388, 23);
 			tbImageExtensions.TabIndex = 6;
 			tbImageExtensions.TextChanged += tbImageExtensions_TextChanged;
 			// 
 			// tbImagePrefixes
 			// 
 			tbImagePrefixes.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-			tbImagePrefixes.Location = new Point(223, 98);
+			tbImagePrefixes.Location = new Point(236, 176);
 			tbImagePrefixes.Name = "tbImagePrefixes";
-			tbImagePrefixes.Size = new Size(398, 23);
+			tbImagePrefixes.Size = new Size(388, 23);
 			tbImagePrefixes.TabIndex = 7;
 			tbImagePrefixes.TextChanged += tbImagePrefixes_TextChanged;
 			// 
 			// lblImagePrefixes
 			// 
 			lblImagePrefixes.AutoSize = true;
-			lblImagePrefixes.Location = new Point(27, 101);
+			lblImagePrefixes.Location = new Point(22, 179);
 			lblImagePrefixes.Name = "lblImagePrefixes";
-			lblImagePrefixes.Size = new Size(190, 15);
+			lblImagePrefixes.Size = new Size(208, 15);
 			lblImagePrefixes.TabIndex = 8;
-			lblImagePrefixes.Text = "Image Prefixes (comma separated)";
+			lblImagePrefixes.Text = "Image Prefix Filter (comma separated)";
 			// 
 			// btnExtract
 			// 
-			btnExtract.Location = new Point(223, 339);
+			btnExtract.Location = new Point(236, 454);
 			btnExtract.Name = "btnExtract";
-			btnExtract.Size = new Size(75, 23);
+			btnExtract.Size = new Size(128, 23);
 			btnExtract.TabIndex = 13;
-			btnExtract.Text = "Extract";
+			btnExtract.Text = "Begin Extraction";
 			toolTip1.SetToolTip(btnExtract, "Begin Extraction");
 			btnExtract.UseVisualStyleBackColor = true;
 			btnExtract.Click += btnExtract_Click;
@@ -174,9 +180,9 @@
 			// 
 			clbCandidateImages.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			clbCandidateImages.FormattingEnabled = true;
-			clbCandidateImages.Location = new Point(223, 156);
+			clbCandidateImages.Location = new Point(236, 234);
 			clbCandidateImages.Name = "clbCandidateImages";
-			clbCandidateImages.Size = new Size(398, 148);
+			clbCandidateImages.Size = new Size(388, 148);
 			clbCandidateImages.TabIndex = 8;
 			toolTip1.SetToolTip(clbCandidateImages, "Select the images from which you would like to extract DNG's");
 			clbCandidateImages.SelectedIndexChanged += clbCandidateImages_SelectedIndexChanged;
@@ -184,7 +190,7 @@
 			// lblCandidateImages
 			// 
 			lblCandidateImages.AutoSize = true;
-			lblCandidateImages.Location = new Point(115, 161);
+			lblCandidateImages.Location = new Point(128, 235);
 			lblCandidateImages.Name = "lblCandidateImages";
 			lblCandidateImages.Size = new Size(102, 15);
 			lblCandidateImages.TabIndex = 11;
@@ -193,7 +199,7 @@
 			// btnSelectAllCandidates
 			// 
 			btnSelectAllCandidates.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			btnSelectAllCandidates.Location = new Point(627, 157);
+			btnSelectAllCandidates.Location = new Point(630, 235);
 			btnSelectAllCandidates.Name = "btnSelectAllCandidates";
 			btnSelectAllCandidates.Size = new Size(92, 23);
 			btnSelectAllCandidates.TabIndex = 9;
@@ -204,7 +210,7 @@
 			// btnDeselectAllCandidates
 			// 
 			btnDeselectAllCandidates.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			btnDeselectAllCandidates.Location = new Point(627, 186);
+			btnDeselectAllCandidates.Location = new Point(630, 264);
 			btnDeselectAllCandidates.Name = "btnDeselectAllCandidates";
 			btnDeselectAllCandidates.Size = new Size(92, 23);
 			btnDeselectAllCandidates.TabIndex = 10;
@@ -229,12 +235,17 @@
 			// 
 			splitContainer1.Panel2.BackColor = SystemColors.Control;
 			splitContainer1.Panel2.Controls.Add(grpImagePreview);
-			splitContainer1.Size = new Size(1375, 375);
-			splitContainer1.SplitterDistance = 847;
+			splitContainer1.Size = new Size(1375, 550);
+			splitContainer1.SplitterDistance = 850;
 			splitContainer1.TabIndex = 14;
 			// 
 			// grpOptions
 			// 
+			grpOptions.Controls.Add(cbRecycleProcessedFiles);
+			grpOptions.Controls.Add(cbExractToSourceDir);
+			grpOptions.Controls.Add(cbCreateOutputSubDirs);
+			grpOptions.Controls.Add(nudMaxPowerShellWindows);
+			grpOptions.Controls.Add(cbLimitPowershellWindows);
 			grpOptions.Controls.Add(tbDNGLabExePath);
 			grpOptions.Controls.Add(btnOptionsHelp);
 			grpOptions.Controls.Add(tbImagePrefixes);
@@ -264,15 +275,77 @@
 			grpOptions.Dock = DockStyle.Fill;
 			grpOptions.Location = new Point(0, 0);
 			grpOptions.Name = "grpOptions";
-			grpOptions.Size = new Size(847, 375);
+			grpOptions.Size = new Size(850, 550);
 			grpOptions.TabIndex = 29;
 			grpOptions.TabStop = false;
 			grpOptions.Text = "Options";
 			// 
+			// cbRecycleProcessedFiles
+			// 
+			cbRecycleProcessedFiles.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			cbRecycleProcessedFiles.AutoSize = true;
+			cbRecycleProcessedFiles.Location = new Point(630, 148);
+			cbRecycleProcessedFiles.Name = "cbRecycleProcessedFiles";
+			cbRecycleProcessedFiles.Size = new Size(146, 19);
+			cbRecycleProcessedFiles.TabIndex = 33;
+			cbRecycleProcessedFiles.Text = "Recycle processed files";
+			toolTip1.SetToolTip(cbRecycleProcessedFiles, "After processing a roll image, send it to the recycle bin");
+			cbRecycleProcessedFiles.UseVisualStyleBackColor = true;
+			// 
+			// cbExractToSourceDir
+			// 
+			cbExractToSourceDir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			cbExractToSourceDir.AutoSize = true;
+			cbExractToSourceDir.Location = new Point(630, 98);
+			cbExractToSourceDir.Name = "cbExractToSourceDir";
+			cbExractToSourceDir.Size = new Size(164, 19);
+			cbExractToSourceDir.TabIndex = 32;
+			cbExractToSourceDir.Text = "Extract to source directory";
+			toolTip1.SetToolTip(cbExractToSourceDir, "Extract all images to the source directory (ignores the destination directory field)");
+			cbExractToSourceDir.UseVisualStyleBackColor = true;
+			cbExractToSourceDir.CheckedChanged += cbExractToSourceDir_CheckedChanged;
+			// 
+			// cbCreateOutputSubDirs
+			// 
+			cbCreateOutputSubDirs.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			cbCreateOutputSubDirs.AutoSize = true;
+			cbCreateOutputSubDirs.Checked = true;
+			cbCreateOutputSubDirs.CheckState = CheckState.Checked;
+			cbCreateOutputSubDirs.Location = new Point(630, 123);
+			cbCreateOutputSubDirs.Name = "cbCreateOutputSubDirs";
+			cbCreateOutputSubDirs.Size = new Size(158, 19);
+			cbCreateOutputSubDirs.TabIndex = 31;
+			cbCreateOutputSubDirs.Text = "Extract to sub-directories";
+			toolTip1.SetToolTip(cbCreateOutputSubDirs, "For each input image, create a new sub directory named after that image and place the extracted images in it");
+			cbCreateOutputSubDirs.UseVisualStyleBackColor = true;
+			// 
+			// nudMaxPowerShellWindows
+			// 
+			nudMaxPowerShellWindows.Location = new Point(499, 416);
+			nudMaxPowerShellWindows.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+			nudMaxPowerShellWindows.Name = "nudMaxPowerShellWindows";
+			nudMaxPowerShellWindows.Size = new Size(70, 23);
+			nudMaxPowerShellWindows.TabIndex = 30;
+			nudMaxPowerShellWindows.Value = new decimal(new int[] { 5, 0, 0, 0 });
+			// 
+			// cbLimitPowershellWindows
+			// 
+			cbLimitPowershellWindows.AutoSize = true;
+			cbLimitPowershellWindows.Checked = true;
+			cbLimitPowershellWindows.CheckState = CheckState.Checked;
+			cbLimitPowershellWindows.Location = new Point(236, 417);
+			cbLimitPowershellWindows.Name = "cbLimitPowershellWindows";
+			cbLimitPowershellWindows.Size = new Size(257, 19);
+			cbLimitPowershellWindows.TabIndex = 29;
+			cbLimitPowershellWindows.Text = "Limit Simultaneous Powershell Windows to:";
+			toolTip1.SetToolTip(cbLimitPowershellWindows, "Limit the number of simultaneous powershell windows");
+			cbLimitPowershellWindows.UseVisualStyleBackColor = true;
+			cbLimitPowershellWindows.CheckedChanged += cbLimitPowershellWindows_CheckedChanged;
+			// 
 			// btnOptionsHelp
 			// 
 			btnOptionsHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			btnOptionsHelp.Location = new Point(627, 310);
+			btnOptionsHelp.Location = new Point(630, 388);
 			btnOptionsHelp.Name = "btnOptionsHelp";
 			btnOptionsHelp.Size = new Size(92, 23);
 			btnOptionsHelp.TabIndex = 28;
@@ -284,7 +357,7 @@
 			// btnOpenDestDir
 			// 
 			btnOpenDestDir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			btnOpenDestDir.Location = new Point(725, 69);
+			btnOpenDestDir.Location = new Point(728, 69);
 			btnOpenDestDir.Name = "btnOpenDestDir";
 			btnOpenDestDir.Size = new Size(116, 23);
 			btnOpenDestDir.TabIndex = 27;
@@ -295,7 +368,7 @@
 			// btnOpenSourceDir
 			// 
 			btnOpenSourceDir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			btnOpenSourceDir.Location = new Point(725, 39);
+			btnOpenSourceDir.Location = new Point(728, 39);
 			btnOpenSourceDir.Name = "btnOpenSourceDir";
 			btnOpenSourceDir.Size = new Size(116, 23);
 			btnOpenSourceDir.TabIndex = 26;
@@ -306,7 +379,7 @@
 			// btnOpenDNGLabExeDir
 			// 
 			btnOpenDNGLabExeDir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			btnOpenDNGLabExeDir.Location = new Point(725, 10);
+			btnOpenDNGLabExeDir.Location = new Point(728, 10);
 			btnOpenDNGLabExeDir.Name = "btnOpenDNGLabExeDir";
 			btnOpenDNGLabExeDir.Size = new Size(116, 23);
 			btnOpenDNGLabExeDir.TabIndex = 25;
@@ -317,7 +390,7 @@
 			// btnRefreshCandidateImages
 			// 
 			btnRefreshCandidateImages.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			btnRefreshCandidateImages.Location = new Point(627, 215);
+			btnRefreshCandidateImages.Location = new Point(630, 293);
 			btnRefreshCandidateImages.Name = "btnRefreshCandidateImages";
 			btnRefreshCandidateImages.Size = new Size(92, 23);
 			btnRefreshCandidateImages.TabIndex = 24;
@@ -328,7 +401,7 @@
 			// lblOptionsString
 			// 
 			lblOptionsString.AutoSize = true;
-			lblOptionsString.Location = new Point(87, 314);
+			lblOptionsString.Location = new Point(100, 392);
 			lblOptionsString.Name = "lblOptionsString";
 			lblOptionsString.Size = new Size(130, 15);
 			lblOptionsString.TabIndex = 23;
@@ -337,9 +410,9 @@
 			// tbOptionsString
 			// 
 			tbOptionsString.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-			tbOptionsString.Location = new Point(223, 310);
+			tbOptionsString.Location = new Point(236, 388);
 			tbOptionsString.Name = "tbOptionsString";
-			tbOptionsString.Size = new Size(398, 23);
+			tbOptionsString.Size = new Size(388, 23);
 			tbOptionsString.TabIndex = 12;
 			toolTip1.SetToolTip(tbOptionsString, "Optionally pass extra option flags to the DNGLab executable");
 			tbOptionsString.TextChanged += tbOptionsString_TextChanged;
@@ -348,7 +421,7 @@
 			// 
 			cbAutoUpdatePreview.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			cbAutoUpdatePreview.AutoSize = true;
-			cbAutoUpdatePreview.Location = new Point(627, 244);
+			cbAutoUpdatePreview.Location = new Point(630, 322);
 			cbAutoUpdatePreview.Name = "cbAutoUpdatePreview";
 			cbAutoUpdatePreview.Size = new Size(137, 19);
 			cbAutoUpdatePreview.TabIndex = 11;
@@ -359,7 +432,7 @@
 			// lblDestDir
 			// 
 			lblDestDir.AutoSize = true;
-			lblDestDir.Location = new Point(99, 73);
+			lblDestDir.Location = new Point(112, 73);
 			lblDestDir.Name = "lblDestDir";
 			lblDestDir.Size = new Size(118, 15);
 			lblDestDir.TabIndex = 18;
@@ -368,7 +441,7 @@
 			// btnBrowseImageDestinationDir
 			// 
 			btnBrowseImageDestinationDir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			btnBrowseImageDestinationDir.Location = new Point(627, 69);
+			btnBrowseImageDestinationDir.Location = new Point(630, 69);
 			btnBrowseImageDestinationDir.Name = "btnBrowseImageDestinationDir";
 			btnBrowseImageDestinationDir.Size = new Size(92, 23);
 			btnBrowseImageDestinationDir.TabIndex = 5;
@@ -379,16 +452,16 @@
 			// tbImageDestDir
 			// 
 			tbImageDestDir.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-			tbImageDestDir.Location = new Point(223, 69);
+			tbImageDestDir.Location = new Point(236, 69);
 			tbImageDestDir.Name = "tbImageDestDir";
-			tbImageDestDir.Size = new Size(398, 23);
+			tbImageDestDir.Size = new Size(388, 23);
 			tbImageDestDir.TabIndex = 4;
 			tbImageDestDir.TextChanged += tbImageDestDir_TextChanged;
 			// 
 			// btnBrowseImageSourceDir
 			// 
 			btnBrowseImageSourceDir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			btnBrowseImageSourceDir.Location = new Point(627, 41);
+			btnBrowseImageSourceDir.Location = new Point(630, 41);
 			btnBrowseImageSourceDir.Name = "btnBrowseImageSourceDir";
 			btnBrowseImageSourceDir.Size = new Size(92, 23);
 			btnBrowseImageSourceDir.TabIndex = 3;
@@ -399,7 +472,7 @@
 			// btnBrowseDNGLabExe
 			// 
 			btnBrowseDNGLabExe.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			btnBrowseDNGLabExe.Location = new Point(627, 12);
+			btnBrowseDNGLabExe.Location = new Point(630, 12);
 			btnBrowseDNGLabExe.Name = "btnBrowseDNGLabExe";
 			btnBrowseDNGLabExe.Size = new Size(92, 23);
 			btnBrowseDNGLabExe.TabIndex = 1;
@@ -414,7 +487,7 @@
 			grpImagePreview.Dock = DockStyle.Fill;
 			grpImagePreview.Location = new Point(0, 0);
 			grpImagePreview.Name = "grpImagePreview";
-			grpImagePreview.Size = new Size(524, 375);
+			grpImagePreview.Size = new Size(521, 550);
 			grpImagePreview.TabIndex = 16;
 			grpImagePreview.TabStop = false;
 			grpImagePreview.Text = "Image Preview";
@@ -427,7 +500,7 @@
 			pictureBox.InitialImage = null;
 			pictureBox.Location = new Point(3, 51);
 			pictureBox.Name = "pictureBox";
-			pictureBox.Size = new Size(515, 318);
+			pictureBox.Size = new Size(512, 493);
 			pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
 			pictureBox.TabIndex = 0;
 			pictureBox.TabStop = false;
@@ -451,7 +524,7 @@
 			// btnClearMessages
 			// 
 			btnClearMessages.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-			btnClearMessages.Location = new Point(1271, 343);
+			btnClearMessages.Location = new Point(1271, 168);
 			btnClearMessages.Name = "btnClearMessages";
 			btnClearMessages.Size = new Size(92, 23);
 			btnClearMessages.TabIndex = 29;
@@ -499,7 +572,7 @@
 			tbMessages.Name = "tbMessages";
 			tbMessages.ReadOnly = true;
 			tbMessages.ScrollBars = ScrollBars.Vertical;
-			tbMessages.Size = new Size(1363, 315);
+			tbMessages.Size = new Size(1363, 140);
 			tbMessages.TabIndex = 16;
 			// 
 			// splitContainer2
@@ -524,7 +597,7 @@
 			splitContainer2.Panel2.RightToLeft = RightToLeft.No;
 			splitContainer2.RightToLeft = RightToLeft.No;
 			splitContainer2.Size = new Size(1375, 751);
-			splitContainer2.SplitterDistance = 375;
+			splitContainer2.SplitterDistance = 550;
 			splitContainer2.TabIndex = 30;
 			// 
 			// grpMessages
@@ -534,7 +607,7 @@
 			grpMessages.Dock = DockStyle.Fill;
 			grpMessages.Location = new Point(0, 0);
 			grpMessages.Name = "grpMessages";
-			grpMessages.Size = new Size(1375, 372);
+			grpMessages.Size = new Size(1375, 197);
 			grpMessages.TabIndex = 0;
 			grpMessages.TabStop = false;
 			grpMessages.Text = "Messages";
@@ -557,6 +630,7 @@
 			splitContainer1.ResumeLayout(false);
 			grpOptions.ResumeLayout(false);
 			grpOptions.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)nudMaxPowerShellWindows).EndInit();
 			grpImagePreview.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
 			menuStrip1.ResumeLayout(false);
@@ -615,5 +689,10 @@
 		private GroupBox grpImagePreview;
 		private SplitContainer splitContainer2;
 		private GroupBox grpMessages;
+		private NumericUpDown nudMaxPowerShellWindows;
+		private CheckBox cbLimitPowershellWindows;
+		private CheckBox cbCreateOutputSubDirs;
+		private CheckBox cbExractToSourceDir;
+		private CheckBox cbRecycleProcessedFiles;
 	}
 }
