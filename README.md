@@ -5,7 +5,7 @@ Specifically, I developed this program for use with Canon CR3 images created usi
 
 DNGLab does all the actual conversion behind the scenes--you must provide this program a DNGLab exe in order for it to do anything.  
 
-As of 1/3/2025, the latest release of DNGLab is 0.6.3.  However, there are features in version 7 (namely correct thumbnail generation) that are extremely helpful for users of this application.  So I've compiled a windows-compatible dnglab.exe and included it in this repository.
+As of 1/3/2025, the latest release of DNGLab is 0.6.3.  However, there are features in version 0.7 (namely correct thumbnail generation) that are extremely helpful for users of this application.  So I've compiled a windows-compatible dnglab.exe and included it in this repository.
 
 Official released of DNGLab can be found at the DNGLab github page [here](https://github.com/dnglab/dnglab) (Go to their releases page and scroll to the assets section of the latest release).
 
