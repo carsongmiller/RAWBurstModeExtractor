@@ -77,6 +77,7 @@
 			tbMessages = new TextBox();
 			splitContainer2 = new SplitContainer();
 			grpMessages = new GroupBox();
+			openThisProjectsGithubPageToolStripMenuItem = new ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
 			splitContainer1.Panel1.SuspendLayout();
 			splitContainer1.Panel2.SuspendLayout();
@@ -291,6 +292,7 @@
 			cbRecycleProcessedFiles.Text = "Recycle processed files";
 			toolTip1.SetToolTip(cbRecycleProcessedFiles, "After processing a roll image, send it to the recycle bin");
 			cbRecycleProcessedFiles.UseVisualStyleBackColor = true;
+			cbRecycleProcessedFiles.CheckedChanged += cbRecycleProcessedFiles_CheckedChanged;
 			// 
 			// cbExractToSourceDir
 			// 
@@ -318,6 +320,7 @@
 			cbCreateOutputSubDirs.Text = "Extract to sub-directories";
 			toolTip1.SetToolTip(cbCreateOutputSubDirs, "For each input image, create a new sub directory named after that image and place the extracted images in it");
 			cbCreateOutputSubDirs.UseVisualStyleBackColor = true;
+			cbCreateOutputSubDirs.CheckedChanged += cbCreateOutputSubDirs_CheckedChanged;
 			// 
 			// nudMaxPowerShellWindows
 			// 
@@ -327,6 +330,7 @@
 			nudMaxPowerShellWindows.Size = new Size(70, 23);
 			nudMaxPowerShellWindows.TabIndex = 30;
 			nudMaxPowerShellWindows.Value = new decimal(new int[] { 5, 0, 0, 0 });
+			nudMaxPowerShellWindows.ValueChanged += nudMaxPowerShellWindows_ValueChanged;
 			// 
 			// cbLimitPowershellWindows
 			// 
@@ -544,7 +548,7 @@
 			// 
 			// fileToolStripMenuItem
 			// 
-			fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openDNGLabGithubPageToolStripMenuItem, quitToolStripMenuItem });
+			fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openDNGLabGithubPageToolStripMenuItem, openThisProjectsGithubPageToolStripMenuItem, quitToolStripMenuItem });
 			fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			fileToolStripMenuItem.Size = new Size(37, 20);
 			fileToolStripMenuItem.Text = "File";
@@ -552,7 +556,7 @@
 			// openDNGLabGithubPageToolStripMenuItem
 			// 
 			openDNGLabGithubPageToolStripMenuItem.Name = "openDNGLabGithubPageToolStripMenuItem";
-			openDNGLabGithubPageToolStripMenuItem.Size = new Size(218, 22);
+			openDNGLabGithubPageToolStripMenuItem.Size = new Size(243, 22);
 			openDNGLabGithubPageToolStripMenuItem.Text = "Open DNGLab Github Page";
 			openDNGLabGithubPageToolStripMenuItem.ToolTipText = "https://github.com/dnglab/dnglab";
 			openDNGLabGithubPageToolStripMenuItem.Click += openDNGLabGithubPageToolStripMenuItem_Click;
@@ -560,7 +564,7 @@
 			// quitToolStripMenuItem
 			// 
 			quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-			quitToolStripMenuItem.Size = new Size(218, 22);
+			quitToolStripMenuItem.Size = new Size(243, 22);
 			quitToolStripMenuItem.Text = "Quit";
 			quitToolStripMenuItem.Click += quitToolStripMenuItem_Click;
 			// 
@@ -611,6 +615,13 @@
 			grpMessages.TabIndex = 0;
 			grpMessages.TabStop = false;
 			grpMessages.Text = "Messages";
+			// 
+			// openThisProjectsGithubPageToolStripMenuItem
+			// 
+			openThisProjectsGithubPageToolStripMenuItem.Name = "openThisProjectsGithubPageToolStripMenuItem";
+			openThisProjectsGithubPageToolStripMenuItem.Size = new Size(243, 22);
+			openThisProjectsGithubPageToolStripMenuItem.Text = "Open This Project's Github Page";
+			openThisProjectsGithubPageToolStripMenuItem.Click += openThisProjectsGithubPageToolStripMenuItem_Click;
 			// 
 			// Form1
 			// 
@@ -694,5 +705,6 @@
 		private CheckBox cbCreateOutputSubDirs;
 		private CheckBox cbExractToSourceDir;
 		private CheckBox cbRecycleProcessedFiles;
+		private ToolStripMenuItem openThisProjectsGithubPageToolStripMenuItem;
 	}
 }

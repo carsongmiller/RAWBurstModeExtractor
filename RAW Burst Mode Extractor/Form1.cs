@@ -25,6 +25,11 @@ namespace RAW_Burst_Mode_Extractor
 				tbOptionsString.Text = Properties.Settings.Default.OptionsString;
 				tbImagePrefixes.Text = Properties.Settings.Default.ImagePrefixes;
 				tbImageExtensions.Text = Properties.Settings.Default.ImageExtensions;
+				cbExractToSourceDir.Checked = Properties.Settings.Default.ExtractToSourceDir;
+				cbCreateOutputSubDirs.Checked = Properties.Settings.Default.ExtractToSubDirs;
+				cbRecycleProcessedFiles.Checked = Properties.Settings.Default.RecycleProcessedFiles;
+				cbLimitPowershellWindows.Checked = Properties.Settings.Default.LimitPowershellWindows;
+				nudMaxPowerShellWindows.Value = Properties.Settings.Default.MaxPowershellWindows;
 			}
 			catch (Exception ex)
 			{
@@ -96,7 +101,7 @@ namespace RAW_Burst_Mode_Extractor
 					{
 						outputPathWithPrefix = tbImageDestDir.Text + "\\" + imageFileNoExtension;
 					}
-					
+
 
 					if (cbCreateOutputSubDirs.Checked)
 					{
@@ -477,12 +482,43 @@ namespace RAW_Burst_Mode_Extractor
 		private void cbLimitPowershellWindows_CheckedChanged(object sender, EventArgs e)
 		{
 			nudMaxPowerShellWindows.Enabled = cbLimitPowershellWindows.Checked;
+			Properties.Settings.Default.LimitPowershellWindows = cbLimitPowershellWindows.Checked;
+			saveSettings();
 		}
 
 		private void cbExractToSourceDir_CheckedChanged(object sender, EventArgs e)
 		{
 			lblDestDir.Enabled = !cbExractToSourceDir.Checked;
 			tbImageDestDir.Enabled = !cbExractToSourceDir.Checked;
+			Properties.Settings.Default.ExtractToSourceDir = cbExractToSourceDir.Checked;
+			saveSettings();
+		}
+
+		private void cbCreateOutputSubDirs_CheckedChanged(object sender, EventArgs e)
+		{
+			Properties.Settings.Default.ExtractToSubDirs = cbCreateOutputSubDirs.Checked;
+			saveSettings();
+		}
+
+		private void cbRecycleProcessedFiles_CheckedChanged(object sender, EventArgs e)
+		{
+			Properties.Settings.Default.RecycleProcessedFiles = cbRecycleProcessedFiles.Checked;
+			saveSettings();
+		}
+
+		private void nudMaxPowerShellWindows_ValueChanged(object sender, EventArgs e)
+		{
+			Properties.Settings.Default.MaxPowershellWindows = (int)nudMaxPowerShellWindows.Value;
+			saveSettings();
+		}
+
+		private void openThisProjectsGithubPageToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Process.Start(new ProcessStartInfo
+			{
+				FileName = "https://github.com/carsongmiller/RAWBurstModeExtractor",
+				UseShellExecute = true
+			});
 		}
 	}
 }

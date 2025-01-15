@@ -12,7 +12,7 @@ namespace RAW_Burst_Mode_Extractor.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -92,6 +92,66 @@ namespace RAW_Burst_Mode_Extractor.Properties {
             }
             set {
                 this["ImageExtensions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ExtractToSourceDir {
+            get {
+                return ((bool)(this["ExtractToSourceDir"]));
+            }
+            set {
+                this["ExtractToSourceDir"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ExtractToSubDirs {
+            get {
+                return ((bool)(this["ExtractToSubDirs"]));
+            }
+            set {
+                this["ExtractToSubDirs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RecycleProcessedFiles {
+            get {
+                return ((bool)(this["RecycleProcessedFiles"]));
+            }
+            set {
+                this["RecycleProcessedFiles"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LimitPowershellWindows {
+            get {
+                return ((bool)(this["LimitPowershellWindows"]));
+            }
+            set {
+                this["LimitPowershellWindows"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int MaxPowershellWindows {
+            get {
+                return ((int)(this["MaxPowershellWindows"]));
+            }
+            set {
+                this["MaxPowershellWindows"] = value;
             }
         }
     }
