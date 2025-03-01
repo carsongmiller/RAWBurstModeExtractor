@@ -21,7 +21,7 @@ When you click extract, a windows powershell (or multiple if you've selected mul
 
 Developed as a .NET winforms application.  I don't believe it will work on any platform except for Windows.
 
-# Notes on using witih lightroom and suggested workflow
+# Notes on using with Lightroom and suggested workflow
 I hate to say it, but in the software's current state (as of february 28 2025 when I'm writing this), this software still does not create a 100% headache free solution for working with RAW burst mode files in lightroom.
 
 I've found that although DNGlab has been updated so that thumbnails are indeed generated correctly for extracted images, so that you can view them nicely in the windows photo viewer, lightroom still does not show the photos accurately in the library module.  Some photos seem to show updated previews that DNGLab created, some seem to show the preview from the original thumbnail of the original raw burst image, and some seem to show a new preview from a different extracted image ... but I haven't played around enough to really find a rhyme or reason to when it works and when it doesn't.  But here's the fix I've found: on import, generate 1:1 previews for the images.  This will allow you to scroll through the images in the library module quickly and accurately.  The downside to this of course is that I believe it takes up more space on the hard drive than standard sized previews, but I did not find that standard sized previews worked to serve this same purpose.  1:1 were indeed required as far as I can tell.
