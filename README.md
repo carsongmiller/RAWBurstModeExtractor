@@ -9,10 +9,13 @@ As of 1/3/2025, the latest release of DNGLab is 0.6.3.  However, there are featu
 
 Official released of DNGLab can be found at the DNGLab github page [here](https://github.com/dnglab/dnglab) (Go to their releases page and scroll to the assets section of the latest release).
 
-# How to Run
-A pre-compiled executable has been included in the exe folder.  Simply download the entire contents of that exe folder and run the .exe file. (dnglab.exe must still be downloaded separately, as described above)
+# How to Download and Run
+- In the releases section of this repository (likely to the right of your screen right now), you can download the RAW Burst Mode Exctactor executable.
+- You may also download a copy of dnglab.exe in the same release, however this is not the _official_ download location for dnglab
+  - dnglab is not my own software, it can be found [here](https://github.com/dnglab/dnglab).
+  - The reason I include an executable of it here is that as of writing this, there are features in the latest version of the dnglab source code (0.7) which are desirable for exctacting raw burst mode images. Unfortunately, there is no released exe provided for v0.7. So to save people the headache of figuring out how to compile it themselves, I compiled it for windows and included it here.
 
-Alternatively, if you'd like, you can of course compile the source code yourself.
+Alternatively, if you'd like, you can of course compile the source code of this project yourself
 
 # How to use
 Simply point this application at a copy of dnglab.exe, point it at some RAW image "roll" files (Canon prefixes them with "CSI"), view a preview if you'd like, and then click extract and get a bunch of individual RAW image files.
@@ -21,7 +24,7 @@ When you click extract, a windows powershell (or multiple if you've selected mul
 
 Developed as a .NET winforms application.  I don't believe it will work on any platform except for Windows.
 
-# Notes on using with Lightroom and suggested workflow
+# Notes on using with Lightroom (and sample workflow)
 I hate to say it, but in the software's current state (as of february 28 2025 when I'm writing this), this software still does not create a 100% headache free solution for working with RAW burst mode files in lightroom.
 
 I've found that although DNGlab has been updated so that thumbnails are indeed generated correctly for extracted images, so that you can view them nicely in the windows photo viewer, lightroom still does not show the photos accurately in the library module.  Some photos seem to show updated previews that DNGLab created, some seem to show the preview from the original thumbnail of the original raw burst image, and some seem to show a new preview from a different extracted image ... but I haven't played around enough to really find a rhyme or reason to when it works and when it doesn't.  But here's the fix I've found: on import, generate 1:1 previews for the images.  This will allow you to scroll through the images in the library module quickly and accurately.  The downside to this of course is that I believe it takes up more space on the hard drive than standard sized previews, but I did not find that standard sized previews worked to serve this same purpose.  1:1 were indeed required as far as I can tell.
